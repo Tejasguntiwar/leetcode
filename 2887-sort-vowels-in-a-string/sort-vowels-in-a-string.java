@@ -34,15 +34,17 @@ class Solution {
     private void countVowels(int[] freq, boolean[] isVowel, String s) {
 
         for(char ch : s.toCharArray()) {
-            if("aeiouAEIOU".indexOf(ch) != -1) {
+            if(isVowel[ch]) {
                 freq[ch]++;
-                isVowel[ch] = true;
             }
         }
     } 
     public String sortVowels(String s) {
         int[] countOfVowels = new int[128];
         boolean[] isVowel = new boolean[128];
+        for(char ch: "aeiouAEIOU".toCharArray()) {
+            isVowel[ch] = true;
+        }
         countVowels(countOfVowels, isVowel, s);
 
         StringBuilder sb = new StringBuilder("");
@@ -53,7 +55,6 @@ class Solution {
 
         for(int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
-            // int ix = "aeiouAEIOU".indexOf(ch);
             if(isVowel[ch]) {                
                 System.out.println((char)(idx));
                 sb.append((char)(idx));
