@@ -14,7 +14,6 @@ class Solution {
                 c++;
                 max = intervals[i][1];
             }
-            continue;
             // System.out.println(intervals[i][0] + " " + intervals[i][1]);
         }
         return c;
