@@ -22,11 +22,29 @@ class Solution {
         list.add(root.val);
         getEls(root.right, list);
     }
+    // private void getEls(TreeNode root1, TreeNode root2, List<Integer> list) {
+    //     if(root1 == null || root2 == null) return;
+
+    //     getEls(root1.left, root2.left, list);
+    //     if(root1.val < root2.val) {
+    //         list.add(root1.val);
+    //         list.add(root2.val);
+    //     }
+    //     else {
+    //         list.add(root2.val);
+    //         list.add(root1.val);
+    //     }
+
+    //     getEls(root1.right, root2.right, list);
+    // }
     public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
         List<Integer> list1 = new ArrayList<>();
         List<Integer> list2 = new ArrayList<>();
         getEls(root1, list1);
         getEls(root2, list2);
+        // List<Integer> list = new ArrayList<>();
+        // getEls(root1, root2, list);
+        // return list;
 
         // Collections.sort(list);
         List<Integer> list3 = new ArrayList<>();
