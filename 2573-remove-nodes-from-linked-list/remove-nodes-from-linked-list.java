@@ -20,29 +20,51 @@ class Solution {
 //         node = new ListNode(st.pop());
 //         setNodes(node.next, st);
 //     }
-    public ListNode removeNodes(ListNode head) {
+    // public ListNode removeNodes(ListNode head) {    //O(n) time //O(n) space
+    //     ArrayList<Integer> list = new ArrayList<>();
+    //     Stack<Integer> st = new Stack<>();
+
+    //     getNodes(head,list);
+        
+    //     int max = list.get(list.size()-1);
+        
+    //     st.push(list.get(list.size()-1));
+        
+    //     for(int i = list.size()-2; i>=0; i--) {
+    //         if(max <= list.get(i)) {
+    //             max = list.get(i);
+    //             st.push(list.get(i));
+    //         }
+    //     }
+    //     ListNode dummy = new ListNode(0);
+    //     ListNode curr = dummy;
+
+    //     while(!st.isEmpty()) {
+    //         curr.next = new ListNode(st.pop());
+    //         curr = curr.next;
+    //     }
+    //     return dummy.next;
+    // }
+    public ListNode removeNodes(ListNode head) {    //O(n) time //O(n) space
         ArrayList<Integer> list = new ArrayList<>();
         Stack<Integer> st = new Stack<>();
 
-        getNodes(head,list);
-        
-        int max = list.get(list.size()-1);
-        
-        st.push(list.get(list.size()-1));
-        
-        for(int i = list.size()-2; i>=0; i--) {
-            if(max <= list.get(i)) {
-                max = list.get(i);
-                st.push(list.get(i));
+        ListNode curr = head;
+        while(curr!=null) {
+            while(!st.isEmpty() && st.peek() < curr.val) {
+                st.pop();
             }
-        }
-        ListNode dummy = new ListNode(0);
-        ListNode curr = dummy;
-
-        while(!st.isEmpty()) {
-            curr.next = new ListNode(st.pop());
+            st.push(curr.val);
             curr = curr.next;
         }
-        return dummy.next;
+
+        ListNode nxt = null;
+
+        while(!st.isEmpty()) {
+            curr = new ListNode(st.pop());
+            curr.next = nxt;
+            nxt = curr;
+        }
+        return nxt;
     }
 }
