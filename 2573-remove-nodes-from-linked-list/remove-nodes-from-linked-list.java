@@ -45,26 +45,54 @@ class Solution {
     //     }
     //     return dummy.next;
     // }
-    public ListNode removeNodes(ListNode head) {    //O(n) time //O(n) space
-        ArrayList<Integer> list = new ArrayList<>();
-        Stack<Integer> st = new Stack<>();
+    // public ListNode removeNodes(ListNode head) {    //O(n) time //O(n) space
+    //     ArrayList<Integer> list = new ArrayList<>();
+    //     Stack<Integer> st = new Stack<>();
 
-        ListNode curr = head;
-        while(curr!=null) {
-            while(!st.isEmpty() && st.peek() < curr.val) {
-                st.pop();
+    //     ListNode curr = head;
+    //     while(curr!=null) {
+    //         while(!st.isEmpty() && st.peek() < curr.val) {
+    //             st.pop();
+    //         }
+    //         st.push(curr.val);
+    //         curr = curr.next;
+    //     }
+
+    //     ListNode nxt = null;
+
+    //     while(!st.isEmpty()) {
+    //         curr = new ListNode(st.pop());
+    //         curr.next = nxt;
+    //         nxt = curr;
+    //     }
+    //     return nxt;
+    // }
+    public ListNode removeNodes(ListNode head) {    //O(n) time //O(1) space
+        ListNode head2 = reverse(head);
+
+        ListNode curr = head2;
+        int max = curr.val;
+
+        while(curr != null && curr.next != null) {
+            if(curr.next.val < max) {
+                curr.next = curr.next.next;
+            } else {
+                max = curr.next.val;
+                curr = curr.next;
             }
-            st.push(curr.val);
-            curr = curr.next;
         }
 
-        ListNode nxt = null;
-
-        while(!st.isEmpty()) {
-            curr = new ListNode(st.pop());
-            curr.next = nxt;
-            nxt = curr;
+        return reverse(head2);
+    }
+    private ListNode reverse(ListNode curr) {
+        ListNode prev = null;
+        ListNode next;
+        while(curr != null) {
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
         }
-        return nxt;
+        return prev;
     }
 }
