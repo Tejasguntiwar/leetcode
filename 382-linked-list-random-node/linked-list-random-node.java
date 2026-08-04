@@ -10,8 +10,10 @@
  */
 class Solution {
     private ArrayList<Integer> list;
+    Random rand;
     public Solution(ListNode head) {
         list = new ArrayList<>();
+        rand = new Random();
         ListNode node = head;
         while(node != null) {
             list.add(node.val);
@@ -26,7 +28,7 @@ class Solution {
     // }
     
     public int getRandom() {
-        int idx = (int)Math.floor((Math.random()*10)%list.size());
+        int idx = rand.nextInt(list.size());
         return list.get(idx);
     }
 }
