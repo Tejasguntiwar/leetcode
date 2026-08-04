@@ -12,14 +12,18 @@ class Solution {
     private ArrayList<Integer> list;
     public Solution(ListNode head) {
         list = new ArrayList<>();
-        create(head, list);
+        ListNode node = head;
+        while(node != null) {
+            list.add(node.val);
+            node = node.next;
+        }
     }
 
-    private void create(ListNode node, ArrayList<Integer> list) {
-        if(node == null) return;
-        list.add(node.val);
-        create(node.next, list);
-    }
+    // private void create(ListNode node, ArrayList<Integer> list) {
+    //     if(node == null) return;
+    //     list.add(node.val);
+    //     create(node.next, list);
+    // }
     
     public int getRandom() {
         int idx = (int)Math.floor((Math.random()*10)%list.size());
